@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+
+<title>БурХелпер - маленький помощник бурильщика</title>
+</head>
+<style>
+html
+{
+  height: 100%;
+  margin:0;
+  padding:0;
+}
+
+body
+{
+	background: linear-gradient(-135deg, #BC8F8F, #DEB887, #00CED1, #00BFFF);
+	background-size: 200% 200%;
+	animation: gradient 5s ease infinite;
+	margin: 10px;
+	max-height: 100%;
+	color: black;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+@keyframes gradient
+{
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+
+@media (max-width: 480px)
+{
+	body
+	{
+	font-size: 16px;
+	}
+	td.header
+	{
+	font-size: 26px;
+	}
+}
+@media (min-width: 481px)
+{
+	body
+	{
+	font-size: 20px;
+	}
+	td.header
+	{
+	font-size: 30px;
+	}
+}
+
+a
+{
+	color: black;
+}
+
+table
+{
+	max-width: 600px;
+	margin: 0 auto;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: white;
+	table-layout: fixed;
+}
+
+td.header
+{
+	text-align: center;
+}
+
+td.tableCenterText
+{
+	align: center;
+	text-align: center;
+}
+
+td
+{
+	padding: 10px;
+	text-align: left;
+	border: 2px solid black;
+}
+
+td:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+td:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+td.rightTd {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+td.leftTd {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+img{
+	position: center;
+	max-width: 100%;
+}
+</style>
+<body>
+<table class="menu">
+	<col style="width: 30%">
+	<tr>
+		<td class="header" colspan="2">БурХелпер:</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText">Программа:</td>
+		<td class="tableCenterText">Что это?</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText"><a href="./bin/debetinfo.html">>ДебетИнфо<</a></td>
+		<td>Программа рассчитывает дебет скважины в реальном времени. Аналог "Водомерки".</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText"><a href="./bin/daicamlock.html">>ДайКамлок<</a></td>
+		<td>Программа поможет подобрать камлок</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="2">Создано для Ассоциации Объединённых Абиссинщиков<br>От людей для людей | Обратная связь: <a href="https://t.me/redrumane">*тык*</a></td>
+	</tr>
+</table>
+</body>
+</html>
