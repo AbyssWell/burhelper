@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+
+<title>БурХелпер > ДебитИнфо</title>
+<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+</head>
+<style>
+html
+{
+  height: 100%;
+  margin:0;
+  padding:0;
+}
+
+body
+{
+	background: linear-gradient(-135deg, #BC8F8F, #DEB887, #00CED1, #00BFFF);
+	background-size: 200% 200%;
+	animation: gradient 5s ease infinite;
+	margin: 10px;
+	max-height: 100%;
+	color: black;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+@keyframes gradient
+{
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+
+@media (max-width: 480px)
+{
+	body
+	{
+		font-size: 16px;
+	}
+	button
+	{
+		font-size: 16px;
+	}
+	input
+	{
+		font-size: 16px;
+	}
+	td.header
+	{
+		font-size: 26px;
+	}
+}
+@media (min-width: 481px)
+{
+	body
+	{
+		font-size: 20px;
+	}
+	button
+	{
+		font-size: 18px;
+	}
+	input
+	{
+		font-size: 18px;
+	}
+	td.header
+	{
+		font-size: 30px;
+	}
+}
+
+a
+{
+	color: black;
+}
+
+table
+{
+	max-width: 500px;
+	margin: 0 auto;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: white;
+	table-layout: fixed;
+}
+
+td.header
+{
+	text-align: center;
+}
+
+td.tableCenterText
+{
+	align: center;
+	text-align: center;
+}
+
+td
+{
+	padding: 10px;
+	text-align: left;
+	border: 2px solid black;
+}
+
+td:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+td:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+td.rightTd {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+td.leftTd {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+input
+{
+	position: center;
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 90%;
+	padding: 5px;
+}
+
+button.start_stop
+{
+	max-width: 150px;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #90EE90;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+button:active
+{
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
+}
+
+</style>
+<body>
+<table class="menu" id="mainTable">
+	<col style="width: 60%">
+	<tr>
+		<td class="header" colspan="2"><a href="../index.html">БурХелпер</a> > ДебитИнфо</td>
+	</tr>
+	<tr>
+		<td>Заполняемый объём, литр:</td>
+		<td class="tableCenterText"><input type="tel" id="volume"></td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="2"><button class="start_stop" id="start_stop" onclick="onStart_StopClick()">Старт!</button></td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="2">Результат:</td>
+	</tr>
+	<tr>
+		<td>Время, сек:</td>
+		<td> - </td>
+	</tr>
+	<tr>
+		<td rowspan="2">Дебит скважины:</td>
+		<td> - </td>
+	</tr>
+	<tr>
+		<td class="rightTd"> - </td>
+	</tr>
+	<tr>
+		<td colspan="2" style="color: blue">Буровой дед: в ожидании водички</td>
+	</tr>
+</table>
+</body>
+
+<script>
+mainTable = document.getElementById('mainTable');
+start_stop = document.getElementById('start_stop');
+volume = document.getElementById('volume');
+
+buttonFlag=true;
+var currentSeconds, debetLm, debetLch, timer;
+countTick=[0,0]; countDot=0;
+strDed=["оценивает напор", "рассматривает цвет ПНД трубы", "насмехается над колодцем", "выбрасывает компас, лозу и рамки", "расшатывает водонос", "подбадривает поверхностный насос"];
+milisecondsInterval=50;
+
+function onStart_StopClick()
+{
+	if(buttonFlag)
+	{
+		if(volume.value.trim() != "" && isNaN(volume.value) != true)
+		{
+			currentSeconds = 0;
+			debetLm=0;
+			debetLch=0;
+			mainTable.rows[7].cells[0].style.color="blue";
+			mainTable.rows[7].cells[0].innerHTML = "Буровой дед: " + strDed[Math.floor(Math.random() * strDed.length)];
+			timer = setInterval("showDebet(milisecondsInterval)", milisecondsInterval);
+			start_stop.innerHTML = "Стоп!";
+			start_stop.style.backgroundColor="#DC143C";
+			buttonFlag=false;
+		}
+		else
+		{
+			mainTable.rows[7].cells[0].style.color="red";
+			mainTable.rows[7].cells[0].innerHTML = "Буровой дед: укажите верно заполняемый объём!";
+		}
+	}
+	else
+	{
+		clearInterval(timer);
+		dedResult(debetLch.toFixed(0));
+		start_stop.innerHTML = "Старт!";
+		start_stop.style.backgroundColor="#90EE90";
+		buttonFlag=true;
+	}
+}
+
+function showDebet(mI)
+{
+	if(currentSeconds>0)
+	{
+	debetLm = volume.value/currentSeconds*60;
+	debetLch = volume.value/currentSeconds*3600;
+	mainTable.rows[4].cells[1].innerHTML = currentSeconds.toFixed(1);
+	mainTable.rows[5].cells[1].innerHTML = debetLm.toFixed(1) + " литр/мин";
+	mainTable.rows[6].cells[0].innerHTML = debetLch.toFixed(0) + " литр/час";
+	}
+	currentSeconds += mI/1000;
+	
+	if(countTick[0]==50) //динамическая надпись при расчёте
+	{
+		countTick[0]=0;
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: " + strDed[Math.floor(Math.random() * strDed.length)];
+	} 
+	else
+	{
+		countTick[0]++;
+		if(countTick[1]==5 && countDot==3)
+		{
+			mainTable.rows[7].cells[0].innerHTML=mainTable.rows[7].cells[0].innerHTML.replace(/\./g, '');
+			countDot=0;
+		}
+		else if(countTick[1]==5)
+		{
+			mainTable.rows[7].cells[0].innerHTML += ".";
+			countTick[1]=0;
+			countDot++;
+		}
+		else
+		{
+			countTick[1]++;
+		}
+	}
+}
+
+function dedResult(d)
+{
+	if(d<400)
+	{
+		mainTable.rows[7].cells[0].style.color="Tomato";
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: выдал всё, что мог. Не расстраивайся, повезёт в следующий раз!";
+	}
+		else if(d>=400 && d<600)
+	{
+		mainTable.rows[7].cells[0].style.color="DarkOrange";
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: неплохо. С этим можно жить.";
+	}
+	else if(d>=600 && d<900)
+	{
+		mainTable.rows[7].cells[0].style.color="DarkKhaki";
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: удовлетворительно. Колодцы нервно курят в сторонке.";
+	}
+	else if(d>=900 && d<1500)
+	{
+		mainTable.rows[7].cells[0].style.color="LimeGreen";
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: хороший дебит для комфортного проживания. Молодец!";
+	}
+	else if(d>=1500 && d<3000)
+	{
+		mainTable.rows[7].cells[0].style.color="SeaGreen";
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: замечательный результат. Ни в чём себе не отказывай!";
+	}
+	else if(d>3000)
+	{
+		mainTable.rows[7].cells[0].style.color="DarkViolet";
+		mainTable.rows[7].cells[0].innerHTML = "Буровой дед: сумасшедший напор! Колян, это ты?";
+	}
+}
+</script>
+</html>
