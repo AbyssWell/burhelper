@@ -5,6 +5,7 @@
 <meta charset="UTF-8" />
 
 <title>БурХелпер - маленький помощник бурильщика</title>
+<link rel="icon" type="image/x-icon" href="./images/icon.png">
 </head>
 <style>
 html
@@ -149,10 +150,11 @@ img{
 <script>
 if(window.location.href=="https://abysswell.github.io/burhelper/")
 {
-	mainTable=document.getElementById('mainTable");
+	mainTable=document.getElementById("mainTable");
 	row=mainTable.insertRow(4);
-	cell=mainTable.insertCell();
+	cell=row.insertCell(0);
 	cell.colSpan="2";
+	cell.className="tableCenterText";
 	cell.innerHTML="<a href=\"https://github.com/AbyssWell/burhelper/archive/refs/heads/main.zip\">> Скачать для оффлайн использования <</a>";
 }
 </script>
