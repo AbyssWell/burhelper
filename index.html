@@ -124,7 +124,7 @@ img{
 }
 </style>
 <body>
-<table class="menu">
+<table class="menu" id="mainTable">
 	<col style="width: 30%">
 	<tr>
 		<td class="header" colspan="2">БурХелпер:</td>
@@ -146,4 +146,13 @@ img{
 	</tr>
 </table>
 </body>
+<script>
+if(window.location.href=="https://abysswell.github.io/burhelper/")
+{
+	row=mainTable.insertRow(4);
+	cell=mainTable.insertCell();
+	cell.colSpan="2";
+	cell.innerHTML="<a href=\"https://github.com/AbyssWell/burhelper/archive/refs/heads/main.zip\">> Скачать для оффлайн использования <</a>";
+}
+</script>
 </html>
