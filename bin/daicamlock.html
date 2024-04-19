@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+
+<title>БурХелпер > ДайКамлок</title>
+</head>
+<style>
+html
+{
+  height: 100%;
+  margin:0;
+  padding:0;
+}
+
+body
+{
+	background: linear-gradient(-135deg, #BC8F8F, #DEB887, #00CED1, #00BFFF);
+	background-size: 200% 200%;
+	animation: gradient 5s ease infinite;
+	margin: 10px;
+	max-height: 100%;
+	color: black;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+@keyframes gradient
+{
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+
+@media (max-width: 480px)
+{
+	body
+	{
+	font-size: 14px;
+	}
+	select
+	{
+	font-size: 12px;
+	min-width: 50%;
+	}
+	td.header
+	{
+	font-size: 24px;
+	}
+}
+@media (min-width: 481px)
+{
+	body
+	{
+	font-size: 20px;
+	}
+	select
+	{
+	font-size: 18px;
+	min-width: 50%;
+	}
+	td.header
+	{
+	font-size: 30px;
+	}
+}
+
+a
+{
+	color: black;
+}
+
+table
+{
+	max-width: 600px;
+	margin: 0 auto;
+	border: 2px solid black;
+	border-radius: 10px;
+	background-color: white;
+	table-layout: fixed;
+}
+
+td.header
+{
+	text-align: center;
+}
+
+td.tableCenterText
+{
+	align: center;
+	text-align: center;
+}
+
+td
+{
+	padding: 10px;
+	text-align: left;
+	border: 2px solid black;
+}
+
+td:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+td:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+td.rightTdRadius {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+td.leftTdRadius {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+td.noTdRadius {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+td.topTdRadius {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 0px;
+}
+
+td.bottomTdRadius {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 10px;
+}
+
+img{
+	position: center;
+	max-width: 100%;
+}
+
+</style>
+<body>
+<table class="menu" id="mainTable">
+	<col style="width: 50%">
+	<col style="width: 25%">
+	<tr>
+		<td class="header" colspan="3"><a href="../index.html">БурХелпер</a> > ДайКамлок</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" >Выберите тип камлока:</td>
+		<td class="tableCenterText" colspan="2" >Условный проход DN (мм):</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText">
+			<select id="camlockTypeSelector" onchange="refreshTableData()" style="text-align-last: center;"></select>
+		</td>
+		<td class="tableCenterText" colspan="2">
+			<select id="camlockDNSelector" onchange="refreshTableData()" style="text-align-last: center;"></select>
+		</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3" >Эскиз камлока:</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3"></td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3" >Размеры на эскизе:</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" rowspan="2" > - </td>
+		<td > - </td>
+		<td class="tableCenterText"> - </td>
+	</tr>
+	<tr>
+		<td class="noTdRadius" > - </td>
+		<td class="tableCenterText"> - </td>
+	</tr>
+	<tr>
+	<td class="tableCenterText" rowspan="2"> - </td>
+		<td class="noTdRadius" > - </td>
+		<td class="tableCenterText"> - </td>
+	</tr>
+	<tr>
+		<td class="noTdRadius" > - </td>
+		<td class="tableCenterText"> - </td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" >Ваш камлок:</td>
+		<td class="tableCenterText" colspan="2" >Возможные ответные части:</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText"> - </td>
+		<td class="tableCenterText" colspan="2"> - </td>
+	</tr>
+	<tr>
+		<td colspan="3"> Примечание: условный проход DN выбирается по камлокам типа E и C с учётом заужения за счёт штуцера под шланг и отличается от DN, указанного производителем. Если требуется собрать соединения из камлоков без штуцера - ориентируйтесь по размерам на эскизе.</td>
+	</tr>
+</table>
+</body>
+
+<script>
+mainTable = document.getElementById('mainTable');
+camlockTypeSelector = document.getElementById('camlockTypeSelector');
+camlockDNSelector = document.getElementById('camlockDNSelector');
+
+camlockType = [["A","RIN","SIZES"], ["B", "REX", "SIZES"], ["C", "H", "SIZES"], ["D", "RIN", "SIZES"], ["E", "H", "SIZES"], ["F", "REX", "SIZES"], ["DC", "-", "SIZES"], ["DP", "-", "SIZES"]];
+camlockDNNumb = [[10,"050"],[15,"075"],[20,"100"],[25,"125"],[32,"150"],[40,"200"],[56,"250"],[65,"300"],[90,"400"],[125,"500"],[150,"600"]];
+
+fillSelectors();
+addAllSizesToMass();
+refreshTableData();
+
+function refreshTableData()
+{
+	refreshCamlockImage();
+	
+	if(camlockTypeSelector.value=="DC" || camlockTypeSelector.value=="DP")
+	{
+		mainTable.rows[6].cells[0].innerHTML="-";	//Тип допразмера
+		mainTable.rows[8].cells[0].innerHTML="-";	//Доп размер
+	}
+	else
+	{
+		mainTable.rows[6].cells[0].innerHTML=camlockType[camlockTypeSelector.selectedIndex][1][0];	//Тип допразмера
+		mainTable.rows[8].cells[0].innerHTML=camlockType[camlockTypeSelector.selectedIndex][1][1][camlockDNSelector.selectedIndex];	//Доп размер
+	}
+	mainTable.rows[11].cells[0].innerHTML=camlockType[camlockTypeSelector.selectedIndex][0]+"-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]; //Камлок готов
+	
+	if(camlockTypeSelector.value=="A" || camlockTypeSelector.value=="E" || camlockTypeSelector.value=="F" || camlockTypeSelector.value=="DP")	//Ответные части
+	{
+		mainTable.rows[11].cells[1].innerHTML="B-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (наружная резьба);<br>C-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (штуцер);<br>D-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (внутренняя резьба);<br>DC-"+camlockDNNumb[camlockDNSelector.selectedIndex][1] +" (заглушка)";
+	}
+	else
+	{
+		mainTable.rows[11].cells[1].innerHTML="A-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (внутренняя резьба);<br>E-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (штуцер);<br>F-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (наружная резьба);<br>DP-"+camlockDNNumb[camlockDNSelector.selectedIndex][1]+" (заглушка)";
+	}
+	
+	for(j=0; j<4; j++)	//Затирание пустых ячеек
+	{
+		if(mainTable.rows[j+6].cells[2])
+		{
+			mainTable.rows[j+6].cells[1].innerHTML="-";
+			mainTable.rows[j+6].cells[2].innerHTML="-";
+		}
+		else
+		{
+			mainTable.rows[j+6].cells[0].innerHTML="-";
+			mainTable.rows[j+6].cells[1].innerHTML="-";
+		}
+	}	
+	for(j=0; j<camlockType[camlockTypeSelector.selectedIndex][2].length; j++)	//Размеры с эскиза
+	{		
+		if(mainTable.rows[j+6].cells[2])
+		{
+			mainTable.rows[j+6].cells[1].innerHTML=camlockType[camlockTypeSelector.selectedIndex][2][j][0]+", мм:";
+			mainTable.rows[j+6].cells[2].innerHTML=camlockType[camlockTypeSelector.selectedIndex][2][j][camlockDNSelector.selectedIndex+1];
+		}
+		else
+		{
+			mainTable.rows[j+6].cells[0].innerHTML=camlockType[camlockTypeSelector.selectedIndex][2][j][0]+", мм:";
+			mainTable.rows[j+6].cells[1].innerHTML=camlockType[camlockTypeSelector.selectedIndex][2][j][camlockDNSelector.selectedIndex+1];
+		}
+	}
+	
+}
+
+function addAllSizesToMass()
+{
+	for(i=0;i<camlockType.length;i++)
+	{		
+		if(camlockType[i][1]=="RIN" || camlockType[i][1]=="REX")
+		{
+			if(camlockType[i][1]=="RIN")
+			{
+				strR_H="Внутренняя резьба R<br>(дюймы | мм):";
+			}
+			else if(camlockType[i][1]=="REX")
+			{
+				strR_H="Наружная резьба R<br>(дюймы | мм):";
+			}
+			camlockR_HSizes = [strR_H, ["1/2\" | 20мм", "3/4\" | 25мм:", "1\" | 32мм", "1 1/4\" | 40мм", "1 1/2\" | 46мм", "2\" | 58мм", "2 1/2\" | 74мм", "3\" | 86мм", "4\" | 111мм", "5\" | 137мм", "6\" | 162мм"]];
+			camlockType[i][1]=camlockR_HSizes;
+		}
+		else if(camlockType[i][1]=="H")
+		{
+			camlockR_HSizes = ["Размер шланга H (внутренний диаметр) под штуцер камлока<br>(дюймы | мм):", ["1/2\" | 12мм", "3/4\" | 20мм", "1\" | 25мм", "1 1/4\" | 32мм", "1 1/2\" | 40мм", "2\" | 50мм", "2 1/2\" | 65мм", "3\" | 80мм", "4\" | 100мм", "5\" | 125мм", "6\" | 150мм"]];
+			camlockType[i][1]=camlockR_HSizes;
+		}
+		
+		switch(camlockType[i][0])
+		{
+			case "A":
+			{
+				camlockType[i][2]=[["N", 24, 32, 43, 50, 56, 68, 85, 102, 126, "-", "-"], ["O", 37, 40, 48, 55, 36, 62, 86, 88, 78, 83, 82], ["P", 14, 19, 23, 28, 36, 46, 56, 73, 98, 118, 150]];
+				break;
+			}
+			case "B":
+			{
+				camlockType[i][2]=[["B", 40, 50, 62, 81, 87, 90, 111, 143, 171, "-", 254], ["C", 31, 33, 40, 46, 48, 54, 55, 57, 61, 61, 67], ["D", 46, 49, 60, 68, 70, 79, 85, 90, 101, 101, 112], ["E", 13, 19, 24, 31, 38, 48, 62, 75, 100, 122, 150]];
+				break;
+			}
+			case "C":
+			{
+				camlockType[i][2]=[["B", 40, 50, 62, 81, 87, 90, 111, 143, 171, "-", 254], ["F", 31, 55, 40, 46, 48, 54, 55, 57, 61, 61, 67], ["G", 66, 85, 98, 104, 109, 124, 135, 159, 169, 188, 240], ["H", 10, 14, 20, 26, 32, 43, 54, 66, 89, 118, 140]];
+				break;
+			}
+			case "D":
+			{
+				camlockType[i][2]=[["A", 30, 115, 138, 178, 185, 195, 208, 250, 270, 300, 400], ["B", 40, 50, 62, 81, 87, 90, 111, 143, 171, "-", 254], ["J", 46, 49, 60, 70, 73, 79, 87, 92, 101, 105, 111], ["K", 14, 21, 26, 35, 38, 46, 56, 73, 98, 128, 144]];
+				break;
+			}
+			case "E":
+			{
+				camlockType[i][2]=[["T", 62, 76, 92, 98, 102, 117, 129, 153, 168, 188, 230], ["U", 28, 25, 36, 41, 44, 49, 51, 51, 55, 56, 60]];
+				break;
+			}
+			case "F":
+			{
+				camlockType[i][2]=[["V", 24, 32, 43, 58, 56, 68, 85, 102, 126, "-", "-"], ["W", 52, 57, 69, 77, 78, 87, 98, 108, 118, 103, 108], ["X", 37, 40, 49, 55, 56, 62, 68, 70, 78, 63, 68], ["Y", 14, 19, 23, 28, 36, 46, 56, 73, 98, 118, 150]];
+				break;
+			}
+			case "DC":
+			{
+				camlockType[i][2]=[["B", 40, 50, 62, 81, 87, 90, 111, 143, 171, "-", 254], ["L", 33, 34, 41, 48, 50, 57, 59, 62, 65, 65, 73], ["M", 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 16]];
+				break;
+			}
+			case "DP":
+			{
+				camlockType[i][2]=[["Z", 4, 10, 10, 10, 10, 10, 10, 10, 12, 12, 12], ["AA", 26, 26, 23, 40, 42, 48, 49, 51, 53, 58, 58]];
+				break;
+			}
+		}
+	}
+}
+
+function refreshCamlockImage()
+{
+	mainTable.rows[4].cells[0].innerHTML="<img src=\"../images/daicamlock/camlock_type_"+camlockTypeSelector.value+".png\">";
+}
+
+function fillSelectors()
+{	
+	for( i=0; i < camlockType.length; i++)
+	{
+		opt = document.createElement('option');
+		opt.value = camlockType[i][0];
+		opt.innerHTML = camlockType[i][0];
+		camlockTypeSelector.appendChild(opt);
+	}
+	for( i=0; i < camlockDNNumb.length; i++)
+	{
+		opt = document.createElement('option');
+		opt.value = camlockDNNumb[i][0];
+		opt.innerHTML = camlockDNNumb[i][0];
+		camlockDNSelector.appendChild(opt);
+	}
+}
+
+
+
+</script>
+</html>
