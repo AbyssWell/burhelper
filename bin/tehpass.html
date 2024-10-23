@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+
+<title>БурХелпер > ТехПасс</title>
+<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+<link rel="stylesheet" href="../styles/generalStyle.css">
+<link rel="stylesheet" href="../styles/tehpass.css">
+</head>
+<body>
+<div class="noprint background"></div>
+<div class="noprint body" id="body">
+<table class="noprint" id="mainTable">
+	<col style="width: 40%">
+	<col style="width: 30%">
+	<tr>
+		<td class="header" colspan="3"><a href="../index.html">БурХелпер</a> > ТехПасс 0.0.1b</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText">Примечания:</td>
+		<td colspan="2">1. Вы можете снять галочки с пунктов, которые не нужно отображать в паспорте.<br>2. Дробные числа записывать через точку вместо запятой.</td>
+	</tr>
+	
+	<tr>
+		<td class="tableCenterText" colspan="3">Общие сведения:</td>
+	</tr>
+	
+	<tr>
+		<td class="tableCenterText">
+			<input type="checkbox" checked id="numPassOK"> Номер паспорта скважины:<br>
+			<input type="text" id="numPass">
+		</td>
+		<td class="tableCenterText">
+			Буровой мастер:<br>
+			<input type="text" id="drillForeman">
+		</td>
+		<td class="tableCenterText">
+			Телефон / другие средства связи:<br>
+			<input type="tel" id="drillForemanPhone">
+		</td>		
+	</tr>
+	<tr>
+		<td class="tableCenterText" rowspan="2">
+			Местоположение скважины:<br>
+			<textarea id="locWell"></textarea>
+		</td>
+		<td class="tableCenterText">
+			Заказчик:<br>
+			<input type="text" id="customer">
+		</td>
+		<td class="tableCenterText">
+			Телефон:<br>
+			<input type="tel" id="customerPhone">
+		</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText">
+			Начало работ:<br>
+			<input type="datetime-local" id="startJob">
+		</td>
+		<td class="tableCenterText">
+			Окончание работ:
+			<input type="datetime-local" id="endJob">
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="tableCenterText" colspan="3">Параметры скважины:</td>
+	</tr>
+	
+	<tr>
+		<td class="tableCenterText">
+			Вид скважины:<br>
+			<select id="wellTypeSelector" style="text-align-last: center;" onchange="refreshElementsSettingsDisplay()">
+				<option value="abyss">Абиссинская скважина</option>
+				<option value="abyssNeedle">Абиссинская забивная скважина "игла"</option>
+				<option value="abyssWell">Абиссинский "колодец"</option>
+				<option value="wellSubmers">Скважина на песок под погружной насос</option>
+			</select>
+		</td>
+		<td class="tableCenterText" colspan="2">
+			Применяемые трубы:<br>
+			<input type="text" id="tubeType">
+		</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText">
+			Глубина скважины, м:<br>
+			<input type="tel" id="wellDepth">
+		</td>
+		<td class="tableCenterText">
+			Применяемый фильтр:<br>
+			<input type="text" id="filterType">
+		</td>
+		<td class="tableCenterText">
+			Длина фильтровой зоны, м:<br>
+			<input type="tel" id="filterLength">
+		</td>
+	</td>
+	<tr>
+		<td class="tableCenterText">
+			Статический уровень, м:<br>
+			<input type="tel" id="staticLevel">
+		</td>
+		<td class="tableCenterText">
+			<input type="checkbox" checked id="dynamicLevelOK"> Динамический уровень, м:<br>
+			<input type="tel" id="dynamicLevel">
+		</td>
+		<td class="tableCenterText">
+			Дебит скважины, литр/час:<br>
+			<input type="tel" id="debitWell">
+		</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3">
+			<input type="checkbox" checked id="guaranteeOK"> Гарантийные обязательства:<br>
+			<textarea id="guaranteeText"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3">Рекомендации по эксплуатации скважины:</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText">Рекомендованный насос:</td>
+		<td class="tableCenterText" colspan="2"><input type="text" id="recommendedPump"></td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3">		
+			<input type="checkbox" checked id="recommendOK"> Дополнительные рекомендации:<br>
+			<textarea id="recommendText"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3">
+			<input type="checkbox" checked id="geoSectOK"> Геологический разрез в месте бурения:<br>
+			<table class="geoSectionInputTable" id="geoSectionInputTable" class="noprint">
+				<col style="width: 22%">
+				<col style="width: 23%">
+				<col style="width: 23%">
+				<col style="width: 16%">
+				<col style="width: 16%">
+				<tr>
+					<td class="tableCenterText" colspan="2" rowspan="2">Слои залегаемых пород:</td>
+					<td class="tableCenterText" rowspan="2" style="word-break: break-all;">Конструкция<br>скважины:</td>
+					<td class="tableCenterText" colspan="2">Глубина от поверхности земли, м:</td>
+				</tr>
+				<tr>
+					<td class="tableCenterText">от</td>
+					<td class="tableCenterText">до</td>
+				</tr>
+			</table>
+	</tr>
+	<tr>
+		<td class="tableCenterText" colspan="3">
+		<button class="startGeneration" id="startGeneration" onclick="generatePass()">Сформировать паспорт!</button>
+		</td>
+	</tr>
+</table>
+</div>
+</body>
+
+<script>
+mainTable = document.getElementById('mainTable');
+geoSectionInputTable = document.getElementById('geoSectionInputTable');
+wellTypeSelector = document.getElementById('wellTypeSelector');
+numPassOK = document.getElementById("numPassOK");
+dynamicLevelOK = document.getElementById("dynamicLevelOK");
+guaranteeOK = document.getElementById("guaranteeOK");
+recommendOK = document.getElementById("recommendOK");
+geoSectOK = document.getElementById("geoSectOK");
+body = document.getElementById('body');
+
+colorSelectOptions = [
+	["Коричневый цвет", "Тёмно-коричневый цвет", "Рыжий цвет", "Жёлтый цвет", "Белый цвет", "Голубой цвет", "Серый цвет", "Тёмно-серый цвет", "Чёрный цвет"], 
+	["Chocolate", "SaddleBrown", "IndianRed", "Khaki", "White", "DarkTurquoise", "Silver", "Gray", "#4d4d4d"]
+	];
+bedrockSelectOptions = ["Почва", "Торф", "Глина", "Суглинок", "Супесь пылеватая", "Супесь песчаная", "Песок мелкой фракции", "Песок средней фракции", "Песок крупной фракции", "Песчано-гравийная смесь", "Гравий"];
+constructionWellSelectOptions = [
+	["Нет", "Водозаборная труба", "Фильтровая зона", "Водозаборная и обсадная труба", "Погружной насос и обсадная труба", "Погружной насос и фильтровая зона", "Водозаборная труба и фильтровая зона на обсадной трубе", "Фильтровая зона на обсадной трубе", "Обсадная труба"],
+	["nothing", "waterIntakePipe", "filterZone", "waterIntakePipeCasing", "submersiblePumpCasing", "submersiblePumpFilterZone", "filterZoneWaterIntakePipeCasing", "filterZoneCasing", "casing"]
+	];
+
+createGeoLayerRow(2);
+
+massInput = 0, massSelect = 0, massTextArea = 0; 
+
+function generatePass()
+{
+	mainTable.style.pointerEvents = "none";
+	passTable = document.createElement('table');
+	document.body.appendChild(passTable);
+	window.scrollTo(0, 0);
+	passTable.className = "passTable";
+	body.style.filter="blur(5px)";
+	
+	massPassTable =
+	[
+	{ 
+		cell: [
+		{text: "<p class='passH1 passPbold'>Технический паспорт</p><p class='passH2 passPbold'>водозаборной скважины для хозяйственного водоснабжения</p>", cellSpan: "all", className: "passTDcenter ", name: "numPass"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPbold'>Общие сведения:</p>", cellSpan: "all", className: "passTD"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Буровой мастер:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "drillForeman"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Телефон / другие средства связи:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "drillForemanPhone"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Заказчик:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "customer"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Телефон:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "customerPhone"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Местоположение скважины:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "locWell"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Начало работ:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "startJob"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Окончание работ:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "endJob"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "", cellSpan: "all", className: ""},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPbold'>Параметры скважины:</p>", cellSpan: "all", className: "passTD"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Вид скважины:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "wellTypeSelector"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Применяемые трубы:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "tubeType"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Глубина скважины, м:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "wellDepth"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Применяемый фильтр:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "filterType"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Длина фильтровой зоны, м:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "filterLength"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Статический уровень, м:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "staticLevel"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Динамический уровень, м:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "dynamicLevel"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Дебит скважины, литр/час:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "debitWell"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "", cellSpan: "all", className: ""},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPbold'>Гарантийные обязательства:</p>", cellSpan: "all", className: "passTD", name: "guaranteeText"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "", cellSpan: "all", className: ""},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPbold'>Рекомендации по эксплуатации скважины:</p>", cellSpan: "all", className: "passTD"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "Рекомендованный насос:", cellSpan: 1, className: "passTD"},
+		{text: "", cellSpan: 1, className: "passTD", name: "recommendedPump"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPnormal'>Дополнительные рекомендации:</p>", cellSpan: "all", className: "passTD", name: "recommendText"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "", cellSpan: "all", className: ""},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPbold'>Геологический разрез в месте бурения:</p>", cellSpan: "all", className: "passTD", name: "geoSectText"},
+		]
+	},
+	{ 
+		cell: [
+		{text: "", cellSpan: "all", className: ""},
+		]
+	},
+	{ 
+		cell: [
+		{text: "<p class='passPbold'>Подписи сторон:</p>", cellSpan: "all", className: "passTD"},
+		]
+	},
+	];
+	
+	maxCells=0;
+	massInput = document.getElementsByTagName("input");
+	massSelect = document.getElementsByTagName("select");
+	massTextArea = document.getElementsByTagName("textarea");
+	for(i=0; i<massPassTable.length; i++) //создаем ячейки
+	{
+		passTableRow=passTable.insertRow();
+		passTableRow.className = "passTableTRPageBreak";
+		for(j=0;j<massPassTable[i].cell.length;j++)
+		{
+			if(massPassTable[i].cell.length>maxCells) maxCells = massPassTable[i].cell.length;
+			passTableCell=passTableRow.insertCell();
+			if(massPassTable[i].cell[j].hasOwnProperty('name'))
+			{
+				switch(massPassTable[i].cell[j].name)
+				{
+					case "numPass":
+						if(numPassOK.checked)
+						{
+							massPassTable[i].cell[j].text = "<p class='passH1 passPbold'>Технический паспорт №"+fillPassCellByInputData(massPassTable[i].cell[j].name)+"</p><p class='passH2 passPbold'>водозаборной скважины для хозяйственного водоснабжения</p>";
+							passTableCell.innerHTML = massPassTable[i].cell[j].text;// заполнение ячейки изменённым текстом
+						}
+						else
+						{
+							passTableCell.innerHTML = massPassTable[i].cell[j].text;// заполнение ячейки текстом
+						}
+						break;
+					case "dynamicLevel":
+						if(!dynamicLevelOK.checked)
+						{
+							passTable.rows[i].style.display = "none";
+						}
+						else passTableCell.innerHTML = massPassTable[i].cell[j].text+fillPassCellByInputData(massPassTable[i].cell[j].name); // заполнение ячейки текст+значение
+						break;
+					case "guaranteeText":
+						if(!guaranteeOK.checked)
+						{
+							passTable.rows[i].style.display = "none";
+							passTable.rows[i-1].style.display = "none";
+						}
+						else passTableCell.innerHTML = massPassTable[i].cell[j].text+fillPassCellByInputData(massPassTable[i].cell[j].name); // заполнение ячейки текст+значение
+						break;
+					case "recommendText":
+						if(!recommendOK.checked)
+						{
+							passTable.rows[i].style.display = "none";
+						}
+						else passTableCell.innerHTML = massPassTable[i].cell[j].text+fillPassCellByInputData(massPassTable[i].cell[j].name); // заполнение ячейки текст+значение
+						break;
+					case "geoSectText":
+						if(!geoSectOK.checked)
+						{
+							passTable.rows[i].style.display = "none";
+							passTable.rows[i-1].style.display = "none";
+						}
+						else passTableCell.innerHTML = massPassTable[i].cell[j].text;
+						break;
+					case "startJob":
+					case "endJob":
+						passTableCell.innerHTML = editTime(massPassTable[i].cell[j].text+fillPassCellByInputData(massPassTable[i].cell[j].name));
+						break;
+						
+					default: passTableCell.innerHTML = massPassTable[i].cell[j].text+fillPassCellByInputData(massPassTable[i].cell[j].name); // заполнение ячейки текст+значение
+				}
+			}
+			else
+			{
+				passTableCell.innerHTML = massPassTable[i].cell[j].text;// заполнение ячейки текстом
+			}
+			passTableCell.className = massPassTable[i].cell[j].className;
+		}
+	}
+	
+	for(i=0; i<massPassTable.length; i++) //объединение ячеек
+	{
+		for(j=0;j<massPassTable[i].cell.length;j++)
+		{
+			if(massPassTable[i].cell[j].cellSpan == "all")
+			{
+				passTable.rows[i].cells[j].colSpan = maxCells;
+			}
+			else
+			{
+				passTable.rows[i].cells[j].colSpan = massPassTable[i].cell[j].cellSpan;
+			}
+		}
+	}
+	
+	buttonsRow = passTable.insertRow(0);
+	buttonsRow.className = "noprint";
+	buttonsCell = buttonsRow.insertCell(0);
+	buttonsCell.colSpan = maxCells;
+	printButton = document.createElement('button');
+	printButton.innerHTML = "Печать";
+	closeButton = document.createElement('button');
+	closeButton.innerHTML = "Закрыть";
+	buttonsCell.appendChild(printButton);
+	buttonsCell.appendChild(closeButton);
+	
+	printButton.onclick = function ()
+	{
+		window.print();
+	}
+	
+	closeButton.onclick = function ()
+	{
+		passTable.remove();
+		mainTable.style.pointerEvents = "auto";
+		body.style.filter = "blur(0px)";
+	}
+	
+	if(geoSectOK.checked)
+	{
+		generateGeoSectionTable(passTable.rows[passTable.rows.length-3].cells[0]);
+	}
+	
+	generateSignaturesTable(passTable.rows[passTable.rows.length-1].lastElementChild, passTable.rows[3].cells[1].innerHTML, passTable.rows[5].cells[1].innerHTML);
+	return;
+}
+
+function generateSignaturesTable(cellContainer, drillForeman, customer)
+{
+	signaturesPassTable = document.createElement("table");
+	signaturesPassTable.className = "signaturesPassTable";
+	cellContainer.appendChild(signaturesPassTable);
+	for(i=0; i<4; i++)
+	{
+		signaturesPassTable.insertRow();
+		for(j=0; j<4; j++)
+		{
+			if((i == 0 || i == 2) && j > 0)
+			{	
+				signaturesPassTable.rows[i].lastElementChild.colSpan = 4;
+				signaturesPassTable.rows[i].lastElementChild.className = "signaturesPassTableTD";
+			}
+			else
+			{
+				signaturesPassTable.rows[i].insertCell();
+				signaturesPassTable.rows[i].cells[j].className = "signaturesPassTableTD";
+			}
+		}
+	}
+	
+	for(i=0; i<4; i++)
+	{
+		col = document.createElement("COL");
+		signaturesPassTable.appendChild(col);
+	}
+	cols = signaturesPassTable.querySelectorAll('col');
+	cols[0].style.width = "20%";
+	cols[1].style.width = "20%";
+	//cols[2].style.width = "55%";
+	//cols[3].style.width = "55%";
+	
+	signaturesPassTable.rows[0].cells[0].innerHTML = "<p class='passPnormal' style='text-align: left; text-decoration: underline'>Работу сдал:</p>";
+	signaturesPassTable.rows[1].cells[0].innerHTML = "<p class='passPnormal' style='text-align: left;'>Буровой мастер</p>";
+	signaturesPassTable.rows[1].cells[1].innerHTML = "<p class='passPnormal'>___________</p>";
+	if(drillForeman == undefined || drillForeman == "")
+	{
+		signaturesPassTable.rows[1].cells[2].innerHTML = "<p class='passPnormal'>_____________________</p>";
+	}
+	else
+	{
+		signaturesPassTable.rows[1].cells[2].innerHTML = "<p class='passPnormal'>"+drillForeman+"</p>";
+	}
+	signaturesPassTable.rows[1].cells[3].innerHTML = "<p class='passPnormal'><___> _________ 20___г.</p>";
+	
+	signaturesPassTable.rows[2].cells[0].innerHTML = "<br><p class='passPnormal' style='text-align: left; text-decoration: underline'>Работу принял:</p>";
+	signaturesPassTable.rows[3].cells[0].innerHTML = "<p class='passPnormal' style='text-align: left;'>Заказчик</p>";
+	signaturesPassTable.rows[3].cells[1].innerHTML = "<p class='passPnormal'>___________</p>";
+	if(customer == undefined || customer == "")
+	{
+		signaturesPassTable.rows[3].cells[2].innerHTML = "<p class='passPnormal'>_____________________</p>";
+	}
+	else
+	{
+		signaturesPassTable.rows[3].cells[2].innerHTML = "<p class='passPnormal'>"+customer+"</p>";
+	}
+	signaturesPassTable.rows[3].cells[3].innerHTML = "<p class='passPnormal'><___> _________ 20___г.</p>";
+	return;
+}
+
+function editTime(invalidDateTime)
+{
+	if(invalidDateTime.includes("T"))
+	{
+		rawDateTime = invalidDateTime.split("T");
+		newTime = rawDateTime[1];
+		rawDate = rawDateTime[0].split("-");
+		newDate = rawDate[2] + "." + rawDate[1] + "." + rawDate[0];
+		correctDateTime = newTime + " " + newDate;
+		return correctDateTime;
+	}
+	else
+	{
+		return invalidDateTime;
+	}
+}
+
+function generateGeoSectionTable(cellContainer)
+{
+	geoSectionPassTable = document.createElement("table");
+	geoSectionPassTable.className = "geoSectionPassTable";
+	cellContainer.appendChild(geoSectionPassTable);
+	
+	for(i=0;i<geoSectionInputTable.rows.length-1;i++)
+	{
+		geoSectionPassTable.insertRow();
+		for(j=0;j<10;j++)
+		{
+			if(i == 0 && j > 2)
+			{
+				geoSectionPassTable.rows[0].cells[2].colSpan = 8;
+			}
+			else
+			{
+				cell = geoSectionPassTable.rows[i].insertCell();
+				switch(j)
+				{
+					case 2:
+						cell.id = "firstCasing";
+						break;
+					case 3:
+						cell.id = "firstCasingVoid";
+						break;
+					case 4:
+						cell.id = "firstWaterIntakePipe";
+						break;
+					case 5:
+						cell.id = "waterIntakePipeVoid";
+						break;
+					case 6:
+						cell.id = "secondWaterIntakePipe";
+						break;
+					case 7:
+						cell.id = "secondCasingVoid";
+						break;
+					case 8:
+						cell.id = "secondCasing";
+						break;
+				}
+				cell.className = "geoSectionPassTableTD";
+			}
+		}
+	}
+	
+	for(i=0;i<10;i++)
+	{
+		col = document.createElement("COL");
+		geoSectionPassTable.appendChild(col);
+	}
+	cols = geoSectionPassTable.querySelectorAll('col');
+	cols[0].style.width = "40%";
+	cols[1].style.width = "55%";
+	for(k=2;k<9; k++)
+	{
+		if(k == 2 || k == 4 || k == 6 || k == 8)
+		{
+			cols[k].style.width = "3%";
+		}
+		else
+		{
+			cols[k].style.width = "5%";
+		}
+	}
+	cols[9].style.width = "100%";
+	
+	geoSectionPassTable.rows[0].cells[0].innerHTML = "Глубина, м";
+	geoSectionPassTable.rows[0].cells[1].innerHTML = "Порода";
+	geoSectionPassTable.rows[0].cells[2].innerHTML = "Конструкция скважины";
+	
+	fillGeoSectionPassTableByInputData();
+	return;
+}
+
+function fillGeoSectionPassTableByInputData()
+{
+	for(i=1;i<geoSectionPassTable.rows.length;i++)
+	{
+		depthRange = geoSectionInputTable.rows[i+1].cells[3].children[0].value + "-" + geoSectionInputTable.rows[i+1].cells[4].children[0].value;
+		bedrock = geoSectionInputTable.rows[i+1].cells[1].children[0].options[geoSectionInputTable.rows[i+1].cells[1].children[0].selectedIndex].innerHTML;
+		bedrockColor = geoSectionInputTable.rows[i+1].cells[1].children[1].options[geoSectionInputTable.rows[i+1].cells[1].children[1].selectedIndex].value;
+		bedrockColorText = geoSectionInputTable.rows[i+1].cells[1].children[1].options[geoSectionInputTable.rows[i+1].cells[1].children[1].selectedIndex].innerHTML.toLowerCase();
+		bedrockDesc = bedrock + ", " + bedrockColorText;
+		wellConstr = geoSectionInputTable.rows[i+1].cells[2].children[0].options[geoSectionInputTable.rows[i+1].cells[2].children[0].selectedIndex].value;
+		wellConstrText = geoSectionInputTable.rows[i+1].cells[2].children[0].options[geoSectionInputTable.rows[i+1].cells[2].children[0].selectedIndex].innerHTML;
+		
+		geoSectionPassTable.rows[i].cells[0].innerHTML = depthRange;
+		geoSectionPassTable.rows[i].cells[1].innerHTML = bedrockDesc;
+		if(bedrockColor == "#4d4d4d")
+		{
+			geoSectionPassTable.rows[i].cells[0].style.color = "White";
+			geoSectionPassTable.rows[i].cells[1].style.color = "White";
+		}
+		else
+		{
+			geoSectionPassTable.rows[i].cells[0].style.color = "Black";
+			geoSectionPassTable.rows[i].cells[1].style.color = "Black";
+		}
+		geoSectionPassTable.rows[i].cells[0].style.backgroundColor = bedrockColor;
+		geoSectionPassTable.rows[i].cells[1].style.backgroundColor = bedrockColor;
+		
+		geoSectionPassTable.rows[i].cells[0].id = wellConstr;
+		geoSectionPassTable.rows[i].lastElementChild.innerHTML = wellConstrText;
+	}
+	geoSectionPassTableIdenticalRowsSpan(geoSectionPassTable, 1, 9); //объединять строки идя справа налево по столбцам таблицы
+	geoSectionPassTableIdenticalRowsSpan(geoSectionPassTable, 1, 1);
+	drawWellConstuction(geoSectionPassTable);
+	return;
+}
+
+function drawWellConstuction(table)
+{
+	for(v=1; v<table.rows.length; v++)
+	{
+		for(c=0; c<table.rows[v].cells.length; c++)
+		{
+			switch(table.rows[v].cells[c].id)
+			{
+				case "firstCasing":
+					switch(table.rows[v].cells[0].id)
+					{
+						case "waterIntakePipe":
+						case "filterZone":
+							tableCellSpan(table.rows[v], c, 2);
+							table.rows[v].cells[c].style.backgroundColor = bedrockColor;
+							break;
+						case "casing":
+						case "waterIntakePipeCasing":
+						case "submersiblePumpCasing":
+							table.rows[v].cells[c].style.backgroundColor = "DarkBlue";
+							break;
+						case "filterZoneCasing":
+						case "submersiblePumpFilterZone":
+						case "filterZoneWaterIntakePipeCasing":
+							table.rows[v].cells[c].style.backgroundColor = "Silver";
+							break;
+					}
+					break;
+				case "firstWaterIntakePipe":
+					switch(table.rows[v].cells[0].id)
+					{
+						case "waterIntakePipe":
+						case "waterIntakePipeCasing":
+						case "filterZoneWaterIntakePipeCasing":
+							table.rows[v].cells[c].style.backgroundColor = "Black";
+							break;
+						case "submersiblePumpCasing":
+						case "submersiblePumpFilterZone":
+							tableCellSpan(table.rows[v], c, 3);
+							table.rows[v].cells[c].style.backgroundColor = "Orange";
+							table.rows[v].style.height = "70px";
+							break;
+						case "filterZone":
+							table.rows[v].cells[c].style.backgroundColor = "Silver";
+							break;
+					}
+					break;
+				case "secondWaterIntakePipe":
+					switch(table.rows[v].cells[0].id)
+					{
+						case "waterIntakePipe":
+						case "waterIntakePipeCasing":
+						case "filterZoneWaterIntakePipeCasing":
+							table.rows[v].cells[c].style.backgroundColor = "Black";
+							break;
+						case "filterZone":
+							table.rows[v].cells[c].style.backgroundColor = "Silver";
+							break;
+					}
+					break;
+				case "firstCasingVoid":
+					switch(table.rows[v].cells[0].id)
+					{
+						case "casing":
+						case "filterZoneCasing":
+							tableCellSpan(table.rows[v], c, 5);
+							break;
+					}
+					break;
+				case "secondCasingVoid":
+					switch(table.rows[v].cells[0].id)
+					{
+						case "waterIntakePipe":
+						case "filterZone":
+							tableCellSpan(table.rows[v], c, 2);
+							table.rows[v].cells[c].style.backgroundColor = bedrockColor;
+							break;
+					}
+					break;
+				case "secondCasing":
+					switch(table.rows[v].cells[0].id)
+					{
+						case "casing":
+						case "waterIntakePipeCasing":
+						case "submersiblePumpCasing":
+							table.rows[v].cells[c].style.backgroundColor = "DarkBlue";
+							break;
+						case "filterZoneCasing":
+						case "submersiblePumpFilterZone":
+						case "filterZoneWaterIntakePipeCasing":
+							table.rows[v].cells[c].style.backgroundColor = "Silver";
+							break;
+					}
+					break;
+			}		
+		}
+	}
+	return;
+}
+
+function geoSectionPassTableIdenticalRowsSpan(table, targetRowNumber, cellNumber)
+{
+	console.log("startRowLength: "+table.rows.length);
+	for(k=targetRowNumber+1; k<table.rows.length; k++)
+	{
+			if(table.rows[targetRowNumber].cells[cellNumber].innerHTML == table.rows[k].cells[cellNumber].innerHTML)
+			{
+				table.rows[targetRowNumber].cells[cellNumber].rowSpan++;
+				table.rows[k].cells[cellNumber].remove();
+				console.log("targetRow: "+targetRowNumber+"; removedRow: "+k);
+			}
+			else
+			{
+				console.log("break;");
+				break;
+			}
+	}
+	if(k < table.rows.length)
+	{
+		console.log("new recursion");
+		geoSectionPassTableIdenticalRowsSpan(table, k, cellNumber);
+	}
+	else
+	{
+		console.log("return");
+		return;
+	}
+}
+
+function tableCellSpan(row, startCellNumber, numberSpan)
+{
+	for(o=startCellNumber+1;o<startCellNumber+numberSpan;o++)
+	{
+		row.cells[startCellNumber+1].remove();
+	}
+	row.cells[startCellNumber].colSpan = numberSpan;
+	return;
+}
+
+function addGeoInputLayer(btn)
+{
+	btn.parentElement.parentElement.id = "parentRow";
+	for(k=0; k<geoSectionInputTable.rows.length; k++)
+	{
+		if(geoSectionInputTable.rows[k].id == btn.parentElement.parentElement.id)
+		{
+			createGeoLayerRow(k+1);
+			btn.parentElement.parentElement.id = "";
+			return;
+		}
+	}
+	return;
+}
+
+function removeGeoInputLayer(btn)
+{
+	btn.parentElement.parentElement.id = "parentRow";
+	for(k=0; k<geoSectionInputTable.rows.length; k++)
+	{
+		if(geoSectionInputTable.rows[k].id == btn.parentElement.parentElement.id)
+		{
+			geoSectionInputTable.rows[k].remove();
+			switchLastRemoveButton();
+			return;
+		}
+	}
+	return;
+}
+
+function depthValueToNextInput(inpt)
+{
+	inpt.parentElement.parentElement.id = "parentRow";
+	for(k=0; k<geoSectionInputTable.rows.length; k++)
+	{
+		if(geoSectionInputTable.rows[k].id == inpt.parentElement.parentElement.id)
+		{
+			if(k+1 < geoSectionInputTable.rows.length)
+			{
+				geoSectionInputTable.rows[k+1].cells[3].children[0].value = inpt.value;
+				inpt.parentElement.parentElement.id = "";
+				return;
+			}
+		}
+	}
+	return;
+}
+
+function switchLastRemoveButton()
+{
+	if(geoSectionInputTable.rows.length <= 3)
+	{
+		geoSectionInputTable.rows[2].cells[0].children[1].setAttribute("disabled","");
+	}
+	else
+	{
+		geoSectionInputTable.rows[2].cells[0].children[1].removeAttribute("disabled","");
+	}
+	return;
+}
+
+function createGeoLayerRow(rowNumber)
+{
+	row = geoSectionInputTable.insertRow(rowNumber);
+	for(i=0; i<5; i++)
+	{
+		row.insertCell();
+		row.cells[i].className = "tableCenterText";
+	}
+	
+	addLayerBtn = document.createElement("button");
+	addLayerBtn.innerHTML = "+↓";
+	addLayerBtn.style = "width:100%; height: 30px;";
+	removeLayerBtn = document.createElement("button");
+	removeLayerBtn.innerHTML = "×→";
+	removeLayerBtn.style = "width:100%; height: 30px;";
+	row.cells[0].appendChild(addLayerBtn);
+	row.cells[0].appendChild(removeLayerBtn);
+	addLayerBtn.onclick = function()
+	{
+		addGeoInputLayer(this);
+	}
+	removeLayerBtn.onclick = function()
+	{
+		removeGeoInputLayer(this);
+	}
+	switchLastRemoveButton();
+	
+	bedrockSelect = document.createElement("select");
+	bedrockSelect.style = "width:100%; height: 30px; text-align-last: center;";
+	fillSelectByOptions(bedrockSelect, bedrockSelectOptions, false);
+	row.cells[1].appendChild(bedrockSelect);	
+	colorSelect = document.createElement("select");
+	colorSelect.style = "width:100%; height: 30px; text-align-last: center;";
+	
+	fillSelectByOptions(colorSelect, colorSelectOptions[0], colorSelectOptions[1]);
+	row.cells[1].appendChild(colorSelect);
+	
+	constructionWellSelect = document.createElement("select");
+	constructionWellSelect.style = "width:100%;  height: 30px; text-align-last: center;";
+	fillSelectByOptions(constructionWellSelect, constructionWellSelectOptions[0], constructionWellSelectOptions[1]);
+	row.cells[2].appendChild(constructionWellSelect);
+	setConstructionWellDisplaySettings(constructionWellSelect);
+	
+	startDepthInput = document.createElement("input");
+	startDepthInput.type = "tel";
+	startDepthInput.style = "width:100%; height: 30px;text-align:center;";
+	row.cells[3].appendChild(startDepthInput);
+	
+	endDepthInput = document.createElement("input");
+	endDepthInput.type = "tel";
+	endDepthInput.style = "width:100%; height: 30px; text-align:center;";
+	row.cells[4].appendChild(endDepthInput);
+	endDepthInput.oninput = function()
+	{
+		depthValueToNextInput(this);
+	}
+	return;
+}
+
+function fillSelectByOptions(slct, optMass, optValMass)
+{
+	for(i=0;i<optMass.length;i++)
+	{		
+		if(Array.isArray(optValMass) || optValMass != false)
+		{
+			opt = new Option(optMass[i],optValMass[i]);
+		}
+		else
+		{
+			opt = new Option(optMass[i]);
+		}
+		slct.append(opt);
+	}
+	return;
+}
+
+function fillPassCellByInputData(cellName)
+{
+	for(k=0; k<massInput.length; k++)
+	{
+		if(massInput[k].type != "checkbox")
+		{
+			if(cellName == massInput[k].id)
+			{
+				return massInput[k].value;
+			}
+		}
+	}
+	for(k=0; k<massSelect.length; k++)
+	{
+		if(cellName == massSelect[k].id)
+		{
+			return massSelect[k].options[massSelect[k].selectedIndex].innerHTML;
+		}
+	}
+	for(k=0; k<massTextArea.length; k++)
+	{
+		if(cellName == massTextArea[k].id)
+		{
+			return massTextArea[k].value;
+		}
+	}
+	return;
+}
+
+function refreshElementsSettingsDisplay()
+{
+	setDynamicLevelCheckboxValue();
+	for(u=2;u<geoSectionInputTable.rows.length;u++)
+	{
+		setConstructionWellDisplaySettings(geoSectionInputTable.rows[u].cells[2].children[0]);
+	}
+	return;
+}
+
+function setDynamicLevelCheckboxValue()
+{
+	switch(wellTypeSelector.value)
+	{
+		case "abyss":
+		case "abyssNeedle":
+			dynamicLevelOK.checked = false;
+			break;
+		case "abyssWell":
+		case "wellSubmers":
+			dynamicLevelOK.checked = true;
+			break;
+	}
+}
+
+function setConstructionWellDisplaySettings(slct)
+{
+	option = slct.getElementsByTagName("option");
+	slct.value=option[0].value;
+	switch(wellTypeSelector.value)
+	{
+		case "abyss":
+		case "abyssNeedle":
+			for(i=0;i<option.length;i++)
+			{
+				option[i].setAttribute("style", "display:block;");
+				if(!(option[i].value == "nothing" || option[i].value == "waterIntakePipe" || option[i].value == "filterZone"))
+				{
+					option[i].setAttribute("style", "display:none;");
+				}
+			}
+			break;
+		case "abyssWell":
+			for(i=0;i<option.length;i++)
+			{
+				option[i].setAttribute("style", "display:block;");
+				if(option[i].value == "waterIntakePipe" || option[i].value == "filterZone" || option[i].value == "submersiblePumpCasing" || option[i].value == "submersiblePumpFilterZone")
+				{
+					option[i].setAttribute("style", "display:none;");
+				}
+			}
+			break;
+		case "wellSubmers":
+			for(i=0;i<option.length;i++)
+			{
+				option[i].setAttribute("style", "display:block;");
+				if(option[i].value == "waterIntakePipe" || option[i].value == "filterZone")
+				{
+					option[i].setAttribute("style", "display:none;");
+				}
+			}
+			break;
+	}
+	return;
+}
+</script>
+</html>
