@@ -1,0 +1,247 @@
+@media (max-width: 750px)
+{
+	.body,
+	table.passTable,
+	select,
+	input,
+	textarea,
+	button
+	{
+		font-size: 12px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	td.header
+	{
+		font-size: 23px;
+	}
+	table
+	{
+		width: 97%;
+	}
+	table.passTable
+	{
+		width: 97%;
+		margin-left: -48.5%;
+	}
+	p.passH1
+	{
+		font-size: 18px;
+	}
+	p.passH2
+	{
+		font-size: 16px;
+	}
+	input[type="checkbox"]
+	{
+		width:14px;
+		height:14px;
+	}
+}
+	
+@media (min-width: 751px)
+{
+	.body,
+	table.passTable,
+	input,
+	select,
+	textarea,
+	button
+	{
+		font-size: 20px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	select
+	{
+		min-width: 50%;
+	}
+	td.header
+	{
+		font-size: 30px;
+	}
+	table
+	{
+		width: 750px;
+	}
+	table.passTable
+	{
+		width: 750px;
+		margin-left: -375px;
+	}
+	p.passH1
+	{
+		font-size: 24px;
+	}
+	p.passH2
+	{
+		font-size: 22px;
+	}
+	input[type="checkbox"]
+	{
+		width:18px;
+		height:18px;
+	}
+}
+
+button.startGeneration
+{
+	min-width: 40%;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #90EE90;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+table.geoSectionInputTable
+{
+	width: 100%;
+}
+
+table.passTable
+{
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	z-index: 3;
+	overflow-y: scroll;
+	background-color: white;
+	border: 3px solid black;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+p.passPbold
+{
+	font-weight: bold;
+	margin:0;
+	padding:0;
+}
+
+p.passPnormal
+{
+	font-weight: normal;
+	margin:0;
+	padding:0;
+}
+
+td.passTDcenter
+{
+	text-align: center;
+}
+
+td.passTD
+{
+	padding: 10px;
+	text-align: left;
+	border: 2px solid black;
+}
+
+table.geoSectionPassTable
+{
+	width: 100%;
+	background-color: white;
+	border: 3px solid black;
+	border-collapse: collapse;
+	border-radius: unset;
+}
+
+td.geoSectionPassTableTD
+{
+	padding: 2px;
+	text-align: center;
+	border: 2px solid black;
+	border-radius: unset;
+}
+
+table.signaturesPassTable
+{
+	width: 100%;
+	background-color: white;
+	border-style: none;
+	border-radius: unset;
+	/*border: 3px solid black;*/
+	border-collapse: collapse;
+	word-break: break-word;
+}
+
+td.signaturesPassTableTD
+{
+	border-style: none;
+	padding: 2px;
+	text-align: center;
+	border-radius: unset;
+}
+
+/*===========================================*/
+
+@media print
+{
+	html, body, table
+	{
+		padding: 0!Important;
+		margin: 0!Important;
+	}
+	html, body
+	{
+		height: 297mm!Important;
+		width: 210mm!Important;
+	}
+	
+	table.passTable
+	{
+		left: 0px;
+		top: 0px;
+		width: 210mm!Important;
+		margin: 0;
+		font-size: 20px!Important;
+	}
+	
+	tr.passTableTRPageBreak
+	{
+		page-break-inside: avoid;
+		page-break-after: auto;
+	}
+	
+	table.geoSectionPassTable
+	{
+		page-break-before: auto;
+		page-break-inside: avoid;
+		page-break-after: auto;
+	}
+	
+	table.signaturesPassTable
+	{
+		page-break-before: auto;
+		page-break-inside: avoid;
+		page-break-after: auto;
+	}
+	
+	p.passH1
+	{
+		font-size: 24px!Important;
+	}
+	p.passH2
+	{
+		font-size: 22px!Important;
+	}
+	
+	.noprint
+	{
+		display: none!Important;
+	}
+	
+	@page
+	{	
+		size: A4 portrait!Important;
+		padding: 0!Important;
+		/*margin: 0!Important;*/
+		margin-left: 20mm!Important;
+		margin-right: 10mm!Important;
+		margin-top: 20mm!Important;
+		margin-bottom: 20mm!Important;
+	}
+}
