@@ -1,0 +1,58 @@
+@media (max-width: 500px)
+{
+	.body,
+	table.passTable,
+	select,
+	input,
+	textarea,
+	button
+	{
+		font-size: 14px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	td.header
+	{
+		font-size: 20px;
+	}
+	table
+	{
+		width: 97%;
+	}
+}
+
+@media (min-width: 501px)
+{
+	body,
+	button,
+	input
+	{
+		font-size: 20px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	td.header
+	{
+		font-size: 30px;
+	}
+	table
+	{
+		width: 500px;
+	}
+}
+
+input[type="tel"],
+input[type="time"],
+button.start_stop
+{
+	text-align: center;
+}
+
+button.start_stop
+{
+	max-width: 100%;
+	padding: 15%;
+	background-color: #90EE90;
+	border: 1px solid black;
+	border-radius: 5px;
+}

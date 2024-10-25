@@ -63,16 +63,23 @@ td.header
 	text-align: center;
 }
 
-td.tableCenterText
+td.tableLeftText
 {
-	align: center;
-	text-align: center;
+	align: left;
+	text-align: left;
+}
+
+td.tableRightText
+{
+	align: right;
+	text-align: right;
 }
 
 td
 {
+	align: center;
+	text-align: center;
 	padding: 10px;
-	text-align: left;
 	border: 2px solid black;
 }
 
@@ -114,7 +121,8 @@ td.noTdRadius
 
 input[type="text"],
 input[type="tel"],
-input[type="datetime-local"]
+input[type="datetime-local"],
+input[type="time"]
 {
 	box-sizing: border-box; 
 	position: center;
