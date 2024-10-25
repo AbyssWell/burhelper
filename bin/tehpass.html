@@ -1,164 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta charset="UTF-8" />
 
-<title>БурХелпер > ТехПасс</title>
-<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-<link rel="stylesheet" href="../styles/generalStyle.css">
-<link rel="stylesheet" href="../styles/tehpass.css">
+	<title>БурХелпер > ТехПасс</title>
+	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	<link rel="stylesheet" href="../styles/generalStyle.css">
+	<link rel="stylesheet" href="../styles/tehpass.css">
 </head>
 <body>
-<div class="noprint background"></div>
-<div class="noprint body" id="body">
-<table class="noprint" id="mainTable">
-	<col style="width: 40%">
-	<col style="width: 30%">
-	<tr>
-		<td class="header" colspan="3"><a href="../index.html">БурХелпер</a> > ТехПасс 0.0.1b</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText">Примечания:</td>
-		<td colspan="2">1. Вы можете снять галочки с пунктов, которые не нужно отображать в паспорте.<br>2. Дробные числа записывать через точку вместо запятой.</td>
-	</tr>
-	
-	<tr>
-		<td class="tableCenterText" colspan="3">Общие сведения:</td>
-	</tr>
-	
-	<tr>
-		<td class="tableCenterText">
-			<input type="checkbox" checked id="numPassOK"> Номер паспорта скважины:<br>
-			<input type="text" id="numPass">
-		</td>
-		<td class="tableCenterText">
-			Буровой мастер:<br>
-			<input type="text" id="drillForeman">
-		</td>
-		<td class="tableCenterText">
-			Телефон / другие средства связи:<br>
-			<input type="tel" id="drillForemanPhone">
-		</td>		
-	</tr>
-	<tr>
-		<td class="tableCenterText" rowspan="2">
-			Местоположение скважины:<br>
-			<textarea id="locWell"></textarea>
-		</td>
-		<td class="tableCenterText">
-			Заказчик:<br>
-			<input type="text" id="customer">
-		</td>
-		<td class="tableCenterText">
-			Телефон:<br>
-			<input type="tel" id="customerPhone">
-		</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText">
-			Начало работ:<br>
-			<input type="datetime-local" id="startJob">
-		</td>
-		<td class="tableCenterText">
-			Окончание работ:
-			<input type="datetime-local" id="endJob">
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="tableCenterText" colspan="3">Параметры скважины:</td>
-	</tr>
-	
-	<tr>
-		<td class="tableCenterText">
-			Вид скважины:<br>
-			<select id="wellTypeSelector" style="text-align-last: center;" onchange="refreshElementsSettingsDisplay()">
-				<option value="abyss">Абиссинская скважина</option>
-				<option value="abyssNeedle">Абиссинская забивная скважина "игла"</option>
-				<option value="abyssWell">Абиссинский "колодец"</option>
-				<option value="wellSubmers">Скважина на песок под погружной насос</option>
-			</select>
-		</td>
-		<td class="tableCenterText" colspan="2">
-			Применяемые трубы:<br>
-			<input type="text" id="tubeType">
-		</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText">
-			Глубина скважины, м:<br>
-			<input type="tel" id="wellDepth">
-		</td>
-		<td class="tableCenterText">
-			Применяемый фильтр:<br>
-			<input type="text" id="filterType">
-		</td>
-		<td class="tableCenterText">
-			Длина фильтровой зоны, м:<br>
-			<input type="tel" id="filterLength">
-		</td>
-	</td>
-	<tr>
-		<td class="tableCenterText">
-			Статический уровень, м:<br>
-			<input type="tel" id="staticLevel">
-		</td>
-		<td class="tableCenterText">
-			<input type="checkbox" checked id="dynamicLevelOK"> Динамический уровень, м:<br>
-			<input type="tel" id="dynamicLevel">
-		</td>
-		<td class="tableCenterText">
-			Дебит скважины, литр/час:<br>
-			<input type="tel" id="debitWell">
-		</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText" colspan="3">
-			<input type="checkbox" checked id="guaranteeOK"> Гарантийные обязательства:<br>
-			<textarea id="guaranteeText"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText" colspan="3">Рекомендации по эксплуатации скважины:</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText">Рекомендованный насос:</td>
-		<td class="tableCenterText" colspan="2"><input type="text" id="recommendedPump"></td>
-	</tr>
-	<tr>
-		<td class="tableCenterText" colspan="3">		
-			<input type="checkbox" checked id="recommendOK"> Дополнительные рекомендации:<br>
-			<textarea id="recommendText"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText" colspan="3">
-			<input type="checkbox" checked id="geoSectOK"> Геологический разрез в месте бурения:<br>
-			<table class="geoSectionInputTable" id="geoSectionInputTable" class="noprint">
-				<col style="width: 22%">
-				<col style="width: 23%">
-				<col style="width: 23%">
-				<col style="width: 16%">
-				<col style="width: 16%">
-				<tr>
-					<td class="tableCenterText" colspan="2" rowspan="2">Слои залегаемых пород:</td>
-					<td class="tableCenterText" rowspan="2" style="word-break: break-all;">Конструкция<br>скважины:</td>
-					<td class="tableCenterText" colspan="2">Глубина от поверхности земли, м:</td>
-				</tr>
-				<tr>
-					<td class="tableCenterText">от</td>
-					<td class="tableCenterText">до</td>
-				</tr>
-			</table>
-	</tr>
-	<tr>
-		<td class="tableCenterText" colspan="3">
-		<button class="startGeneration" id="startGeneration" onclick="generatePass()">Сформировать паспорт!</button>
-		</td>
-	</tr>
-</table>
-</div>
+	<div class="noprint background"></div>
+	<div class="noprint body" id="body">
+		<table class="noprint" id="mainTable">
+			<col style="width: 40%">
+			<col style="width: 30%">
+			<tr>
+				<td class="header" colspan="3"><a href="../index.html">БурХелпер</a> > ТехПасс 0.0.2b</td>
+			</tr>
+			<tr>
+				<td>Примечания:</td>
+				<td colspan="2" class="tableLeftText">1. Вы можете снять галочки с пунктов, которые не нужно отображать в паспорте.<br>2. Дробные числа записывать через точку вместо запятой.</td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">Общие сведения:</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<input type="checkbox" checked id="numPassOK"> Номер паспорта скважины:<br>
+					<input type="text" id="numPass">
+				</td>
+				<td>
+					Буровой мастер:<br>
+					<input type="text" id="drillForeman">
+				</td>
+				<td>
+					Телефон / другие средства связи:<br>
+					<input type="tel" id="drillForemanPhone">
+				</td>		
+			</tr>
+			<tr>
+				<td rowspan="2">
+					Местоположение скважины:<br>
+					<textarea id="locWell"></textarea>
+				</td>
+				<td>
+					Заказчик:<br>
+					<input type="text" id="customer">
+				</td>
+				<td>
+					Телефон:<br>
+					<input type="tel" id="customerPhone">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Начало работ:<br>
+					<input type="datetime-local" id="startJob">
+				</td>
+				<td>
+					Окончание работ:
+					<input type="datetime-local" id="endJob">
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">Параметры скважины:</td>
+			</tr>
+			
+			<tr>
+				<td>
+					Вид скважины:<br>
+					<select id="wellTypeSelector" style="text-align-last: center;" onchange="refreshElementsSettingsDisplay()">
+						<option value="abyss">Абиссинская скважина</option>
+						<option value="abyssNeedle">Абиссинская забивная скважина "игла"</option>
+						<option value="abyssWell">Абиссинский "колодец"</option>
+						<option value="wellSubmers">Скважина на песок под погружной насос</option>
+					</select>
+				</td>
+				<td colspan="2">
+					Применяемые трубы:<br>
+					<input type="text" id="tubeType">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Глубина скважины, м:<br>
+					<input type="tel" id="wellDepth">
+				</td>
+				<td>
+					Применяемый фильтр:<br>
+					<input type="text" id="filterType">
+				</td>
+				<td>
+					Длина фильтровой зоны, м:<br>
+					<input type="tel" id="filterLength">
+				</td>
+			</td>
+			<tr>
+				<td>
+					Статический уровень, м:<br>
+					<input type="tel" id="staticLevel">
+				</td>
+				<td>
+					<input type="checkbox" checked id="dynamicLevelOK"> Динамический уровень, м:<br>
+					<input type="tel" id="dynamicLevel">
+				</td>
+				<td>
+					Дебит скважины, литр/час:<br>
+					<input type="tel" id="debitWell">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="checkbox" checked id="guaranteeOK"> Гарантийные обязательства:<br>
+					<textarea id="guaranteeText"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">Рекомендации по эксплуатации скважины:</td>
+			</tr>
+			<tr>
+				<td>Рекомендованный насос:</td>
+				<td colspan="2"><input type="text" id="recommendedPump"></td>
+			</tr>
+			<tr>
+				<td colspan="3">		
+					<input type="checkbox" checked id="recommendOK"> Дополнительные рекомендации:<br>
+					<textarea id="recommendText"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="checkbox" checked id="geoSectOK"> Геологический разрез в месте бурения:<br>
+					<table class="geoSectionInputTable" id="geoSectionInputTable" class="noprint">
+						<col style="width: 22%">
+						<col style="width: 23%">
+						<col style="width: 23%">
+						<col style="width: 16%">
+						<col style="width: 16%">
+						<tr>
+							<td colspan="2" rowspan="2">Слои залегаемых пород:</td>
+							<td rowspan="2" style="word-break: break-all;">Конструкция<br>скважины:</td>
+							<td colspan="2">Глубина от поверхности земли, м:</td>
+						</tr>
+						<tr>
+							<td>от</td>
+							<td>до</td>
+						</tr>
+					</table>
+			</tr>
+			<tr>
+				<td colspan="3">
+				<button class="startGeneration" id="startGeneration" onclick="generatePass()">Сформировать паспорт!</button>
+				</td>
+			</tr>
+		</table>
+	</div>
 </body>
 
 <script>
@@ -451,6 +451,7 @@ function generatePass()
 	buttonsRow = passTable.insertRow(0);
 	buttonsRow.className = "noprint";
 	buttonsCell = buttonsRow.insertCell(0);
+	buttonsCell.className="tableRightText";
 	buttonsCell.colSpan = maxCells;
 	printButton = document.createElement('button');
 	printButton.innerHTML = "Печать";
@@ -682,6 +683,10 @@ function drawWellConstuction(table)
 				case "firstCasing":
 					switch(table.rows[v].cells[0].id)
 					{
+						case "nothing":
+							tableCellSpan(table.rows[v], c, 7);
+							table.rows[v].cells[c].style.backgroundColor = bedrockColor;
+							break;
 						case "waterIntakePipe":
 						case "filterZone":
 							tableCellSpan(table.rows[v], c, 2);
@@ -773,29 +778,24 @@ function drawWellConstuction(table)
 
 function geoSectionPassTableIdenticalRowsSpan(table, targetRowNumber, cellNumber)
 {
-	console.log("startRowLength: "+table.rows.length);
 	for(k=targetRowNumber+1; k<table.rows.length; k++)
 	{
 			if(table.rows[targetRowNumber].cells[cellNumber].innerHTML == table.rows[k].cells[cellNumber].innerHTML)
 			{
 				table.rows[targetRowNumber].cells[cellNumber].rowSpan++;
 				table.rows[k].cells[cellNumber].remove();
-				console.log("targetRow: "+targetRowNumber+"; removedRow: "+k);
 			}
 			else
 			{
-				console.log("break;");
 				break;
 			}
 	}
 	if(k < table.rows.length)
 	{
-		console.log("new recursion");
 		geoSectionPassTableIdenticalRowsSpan(table, k, cellNumber);
 	}
 	else
 	{
-		console.log("return");
 		return;
 	}
 }
