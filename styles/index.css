@@ -1,0 +1,36 @@
+@media (max-width: 650px)
+{
+	body,
+	select
+	{
+		font-size: 14px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	td.header
+	{
+		font-size: 23px;
+	}
+	table
+	{
+		width: 97%;
+	}
+}
+@media (min-width: 651px)
+{
+	body,
+	select
+	{
+		font-size: 20px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	td.header
+	{
+		font-size: 30px;
+	}
+	table
+	{
+		width: 650px;
+	}
+}

@@ -1,0 +1,83 @@
+@media (max-width: 650px)
+{
+	body,
+	select
+	{
+		font-size: 14px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	select
+	{
+		min-width: 50%;
+	}
+	td.header
+	{
+		font-size: 23px;
+	}
+	table
+	{
+		width: 97%;
+	}
+	input[type="radio"]
+	{
+		width: 12px;
+		width: 12px;
+	}
+}
+@media (min-width: 651px)
+{
+	body,
+	select
+	{
+		font-size: 20px;
+		font-style: normal;
+		font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	}
+	select
+	{
+		min-width: 50%;
+	}
+	td.header
+	{
+		font-size: 30px;
+	}
+	table
+	{
+		width: 650px;
+	}
+}
+
+figure.imageContainer
+{
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	display: flex;
+	margin: 0;
+	padding: 5px;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+img.camlockImage
+{
+	width: 100%;
+	margin: auto;
+}
+
+select
+{
+	text-align-last: center;
+}
+
+input[type="radio"]
+{
+	margin:0;
+}
+
+label
+{
+	margin-left: 3px;
+}
