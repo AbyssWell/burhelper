@@ -6,158 +6,38 @@
 
 <title>БурХелпер - маленький помощник бурильщика</title>
 <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+<link rel="stylesheet" href="./styles/generalStyle.css">
+<link rel="stylesheet" href="./styles/index.css">
 </head>
-<style>
-html
-{
-  height: 100%;
-  margin:0;
-  padding:0;
-}
-
-body
-{
-	background: linear-gradient(-135deg, #BC8F8F, #DEB887, #00CED1, #00BFFF);
-	background-size: 200% 200%;
-	background-attachment: fixed;
-	animation: gradient 5s ease infinite;
-	margin: 10px;
-	max-height: 100%;
-	color: black;
-	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-}
-
-@keyframes gradient
-{
-	0%{
-		background-position: 0 50%;
-	}
-	50%{
-		background-position: 100% 50%;
-	}
-	100%{
-		background-position: 0 50%;
-	}
-}
-
-@media (max-width: 750px)
-{
-	body
-	{
-		font-size: 14px;
-	}
-	td.header
-	{
-		font-size: 22px;
-	}
-	table
-	{
-		width: 97%;
-	}
-}
-@media (min-width: 751px)
-{
-	body
-	{
-		font-size: 20px;
-	}
-	td.header
-	{
-		font-size: 30px;
-	}
-	table
-	{
-		width: 600px;
-	}
-}
-
-a
-{
-	color: black;
-}
-
-table
-{
-	margin: 0 auto;
-	border: 2px solid black;
-	border-radius: 10px;
-	background-color: white;
-	table-layout: fixed;
-}
-
-td.header
-{
-	text-align: center;
-}
-
-td.tableCenterText
-{
-	align: center;
-	text-align: center;
-}
-
-td
-{
-	padding: 10px;
-	text-align: left;
-	border: 2px solid black;
-}
-
-td:first-child {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
-
-td:last-child {
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-td.rightTd {
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-td.leftTd {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	border-top-right-radius: 0px;
-	border-bottom-right-radius: 0px;
-}
-
-img{
-	position: center;
-	max-width: 100%;
-}
-</style>
 <body>
-<table class="menu" id="mainTable">
-	<col style="width: 35%">
-	<tr>
-		<td class="header" colspan="2">БурХелпер 1.0.0</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText">Программа:</td>
-		<td class="tableCenterText">Что это?</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText"><a href="./bin/debitinfo.html">>ДебитИнфо<</a></td>
-		<td>Программа рассчитывает дебит скважины в реальном времени <u>без геолокации</u>. Аналог "Водомерки".</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText"><a href="./bin/daicamlock.html">>ДайКамлок<</a></td>
-		<td>Программа поможет подобрать камлок.</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText"><a href="./bin/tehpass.html">>ТехПасс<</a></td>
-		<td>Программа формирует техпаспорт скважины <u>без сбора данных и геолокации</u>.</td>
-	</tr>
-	<tr>
-		<td class="tableCenterText" colspan="2">Создано для Ассоциации Объединённых Абиссинщиков<br>От людей для людей | Обратная связь: <a href="https://t.me/redrumane">*тык*</a></td>
-	</tr>
-</table>
+	<div class="background"></div>
+	<div class="body" id="body">
+		<table id="mainTable">
+			<col style="width: 35%">
+			<tr>
+				<td class="header" colspan="2">БурХелпер 1.0.0</td>
+			</tr>
+			<tr>
+				<td>Программа:</td>
+				<td>Что это?</td>
+			</tr>
+			<tr>
+				<td><a href="./bin/debitinfo.html">>ДебитИнфо<</a></td>
+				<td class="tableLeftText">Программа рассчитывает дебит скважины в реальном времени <u>без геолокации</u>. Аналог "Водомерки".</td>
+			</tr>
+			<tr>
+				<td><a href="./bin/daicamlock.html">>ДайКамлок<</a></td>
+				<td class="tableLeftText">Программа поможет подобрать камлок.</td>
+			</tr>
+			<tr>
+				<td><a href="./bin/tehpass.html">>ТехПасс<</a></td>
+				<td class="tableLeftText">Программа формирует техпаспорт скважины <u>без сбора данных и геолокации</u>.</td>
+			</tr>
+			<tr>
+				<td colspan="2">Создано для Ассоциации Объединённых Абиссинщиков<br>От людей для людей | Обратная связь: <a href="https://t.me/redrumane">*тык*</a></td>
+			</tr>
+		</table>
+	</div>
 </body>
 <script>
 if(window.location.href=="https://abysswell.github.io/burhelper/" || window.location.href=="https://abysswell.github.io/burhelper/index.html")
